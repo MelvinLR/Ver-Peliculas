@@ -1,0 +1,11 @@
+(function(){let e=document.createElement(`link`).relList;if(e&&e.supports&&e.supports(`modulepreload`))return;for(let e of document.querySelectorAll(`link[rel="modulepreload"]`))n(e);new MutationObserver(e=>{for(let t of e)if(t.type===`childList`)for(let e of t.addedNodes)e.tagName===`LINK`&&e.rel===`modulepreload`&&n(e)}).observe(document,{childList:!0,subtree:!0});function t(e){let t={};return e.integrity&&(t.integrity=e.integrity),e.referrerPolicy&&(t.referrerPolicy=e.referrerPolicy),t.credentials=e.crossOrigin===`use-credentials`?`include`:e.crossOrigin===`anonymous`?`omit`:`same-origin`,t}function n(e){if(e.ep)return;e.ep=!0;let n=t(e);fetch(e.href,n)}})();var e=`https://placehold.co/210x295`,t=async t=>{let n=`https://api.tvmaze.com/singlesearch/shows?q=${encodeURIComponent(t)}`;try{let t=await fetch(n);if(!t.ok)throw Error(`No encontrada`);let r=await t.json();return{id:r.id,name:r.name,rating:r.rating,image:r.image?.medium??e}}catch{return null}},n=async t=>{let n=`https://api.tvmaze.com/shows/${t}`;try{let t=await fetch(n);if(!t.ok)throw Error(`No encontrada`);let r=await t.json();return{id:r.id,name:r.name,rating:r.rating,image:r.image?.medium??e}}catch{return null}},r=async e=>{let t=`https://api.tvmaze.com/shows/${e}/episodes`,n=(await fetch(t).then(e=>e.json())).map(e=>({number:e.number,season:e.season,rating:e.rating.average}));return Object.groupBy(n,e=>e.season)},i=e=>`
+  <div class="episode episode-${e.number} rating-${Math.round(e.rating||0)}">${e.number}</div>
+`,a=(e,t)=>`
+  <article class="season">
+    <header class="season-header">T${t}</header>
+    ${e.map(i).join(``)}
+  </article>
+`,o=e=>Object.values(e).map((e,t)=>a(e,t+1)).join(``),s=document.querySelector(`header`),c=document.querySelector(`.episodes`),l=document.querySelector(`#searchInput`),u=document.querySelector(`#searchButton`),d=async e=>{s.setHTMLUnsafe(`<h2>Buscando "${e}"...</h2>`),c.setHTMLUnsafe(``);let i;if(i=isNaN(e)?await t(e):await n(e),!i){s.setHTMLUnsafe(`<h2>Serie no encontrada. Intenta con otra.</h2>`);return}let a=await r(i.id);s.setHTMLUnsafe(`
+    <img class="poster" src="${i.image}" alt="Poster de ${i.name}">
+    <h1>${i.name}</h1>
+  `);let l=o(a);c.setHTMLUnsafe(l)};u.addEventListener(`click`,()=>{let e=l.value.trim();e&&d(e)}),l.addEventListener(`keypress`,e=>{if(e.key===`Enter`){let e=l.value.trim();e&&d(e)}}),d(`2993`);
