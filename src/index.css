@@ -1,0 +1,102 @@
+/* Estilos generales para que se vea centrado y limpio */
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background-color: #0f172a; /* Fondo oscuro para que resalten los colores */
+  color: white;
+  margin: 0;
+  padding: 20px;
+}
+
+.content {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.poster {
+  max-width: 210px;
+  border-radius: 8px;
+}
+
+/* --- Estilos del Buscador --- */
+.search-container {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.search-container input {
+  padding: 10px 15px;
+  border-radius: 25px;
+  border: none;
+  outline: none;
+  width: 250px;
+  font-size: 1rem;
+}
+
+.search-container button {
+  padding: 10px 20px;
+  border-radius: 25px;
+  border: none;
+  background: #48bb78;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+/* --- Estilos de las Temporadas y Episodios --- */
+.episodes {
+ display: flex;
+  flex-direction: column; /* Apila las temporadas una debajo de otra */
+  gap: 15px; /* Espacio entre las temporadas */
+  width: 100%; /* Obliga al contenedor a usar todo el espacio horizontal */
+  max-width: 900px; /* Evita que se estire demasiado en pantallas gigantes */
+}
+
+.season {
+  display: flex;
+  flex-wrap: wrap; /* Permite que los episodios bajen de línea si no caben en la pantalla */
+  align-items: center;
+  justify-content: center; /* Centra los episodios horizontalmente. Cambia a 'flex-start' si los quieres a la izquierda */
+}
+
+.season-header,
+.episode {
+  --size: 2rem;
+  width: var(--size);
+  height: var(--size);
+  background: var(--color);
+  display: grid;
+  place-items: center;
+  margin: 2px;
+  border-radius: 25px; /* Hace los cuadros redondos */
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+/* Color por defecto para el texto "T1", "T2", etc. */
+.season-header {
+  --color: #334155; 
+  margin-right: 10px;
+}
+
+/* Colores del rating */
+.rating-0 { --color: #2b0a27; }
+.rating-1 { --color: #451010; }
+.rating-2 { --color: #922323; }
+.rating-3 { --color: #c53030; }
+.rating-4 { --color: #c53030; }
+.rating-5 { --color: #c53030; }
+.rating-6 { --color: #dd6b20; }
+.rating-7 { --color: #f6e05e; color: #333; } /* Letra oscura para buen contraste */
+.rating-8 { --color: #48bb78; }
+.rating-9 { --color: #2f855a; }
+.rating-10 { --color: #4CAF50; }
